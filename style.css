@@ -1,0 +1,117 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "JetBrains Mono", monospace;
+}
+
+p,
+label,
+input,
+h1,
+h2,
+span {
+  font-family: inherit;
+  color: var(--white);
+}
+
+/* custom properties */
+
+:root {
+  --white: #fff;
+  --black: #000;
+
+  /* greys */
+  --grey-950: #08070b;
+  --grey-900: #14131b;
+  --grey-850: #18171f;
+  --grey-800: #24232c;
+  --grey-700: #54535b;
+  --grey-600: #817d92;
+  --grey-200: #e6e5ea;
+
+  --green: #a4ffaf;
+
+  --yellow: #f8cd65;
+
+  --orange: #fb7c58;
+
+  --red: #f64a4a;
+}
+
+body {
+  background-color: var(--grey-950);
+}
+
+main {
+  width: 90%;
+  margin-inline: auto;
+}
+
+/* generated password section*/
+
+.generated-password-section {
+  background-color: var(--grey-800);
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.generated-password-section > span {
+  color: var(--grey-700);
+}
+
+.generated-password-section > span {
+  font-size: clamp(1.5rem, 5vw, 10rem);
+}
+
+.copy-password-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/*
+
+*/
+
+/* user password prefrences
+
+/* password length section */
+
+#user-password-preferences-section {
+  background-color: var(--grey-800);
+  border: 5px solid red;
+  position: relative;
+  display: block;
+}
+
+.password-lenth-container {
+  margin-block: 2rem;
+}
+
+.password-progress-bar {
+  position: relative;
+  height: 8px;
+  width: 100%;
+  background-color: var(--grey-850);
+}
+
+.password-progress-bar-filled {
+  height: 8px;
+  width: 10%;
+  background-color: var(--green);
+}
+
+.progress-bar-circle {
+  position: absolute;
+  top: -120%;
+  left: 50%;
+  height: 28px;
+  width: 28px;
+  background-color: var(--white);
+  border-radius: 50%;
+}
