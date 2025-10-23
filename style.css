@@ -68,6 +68,10 @@ main {
   font-size: clamp(1.5rem, 5vw, 10rem);
 }
 
+.generated-password.rendered {
+  color: var(--white);
+}
+
 .copy-password-btn {
   background-color: transparent;
   border: none;
@@ -121,6 +125,10 @@ main {
 }
 
 /* password criteria section */
+
+input[type="checkbox"] {
+  accent-color: var(--green);
+}
 
 /* password strength section */
 
