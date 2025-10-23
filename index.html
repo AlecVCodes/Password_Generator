@@ -34,11 +34,11 @@
         <div class="password-lenth-container">
           <div class="details">
             <p class="password-length">Character Length</p>
-            <p>0</p>
+            <p class="current-password-length-value">0</p>
           </div>
           <div class="password-progress-bar">
             <div class="password-progress-bar-filled">
-              <div class="progress-bar-circle"></div>
+              <div class="progress-bar-circle" draggable="true"></div>
             </div>
           </div>
         </div>
@@ -66,6 +66,7 @@
           <div class="password-strength-container">
             <p>STRENGTH</p>
             <div class="strength-boxes">
+              <span class="password-strength-value" data-strength="">WEAK</span>
               <div class="password-strength-box"></div>
               <div class="password-strength-box"></div>
               <div class="password-strength-box"></div>

@@ -78,13 +78,16 @@ main {
 
 */
 
-/* user password prefrences
+/* user password prefrences */
 
+#user-password-preferences-section {
+  padding: 1.5rem 2rem;
+}
 /* password length section */
 
 #user-password-preferences-section {
   background-color: var(--grey-800);
-  border: 5px solid red;
+
   position: relative;
   display: block;
 }
@@ -102,16 +105,111 @@ main {
 
 .password-progress-bar-filled {
   height: 8px;
-  width: 10%;
+  width: 0%;
   background-color: var(--green);
 }
 
 .progress-bar-circle {
   position: absolute;
   top: -120%;
-  left: 50%;
+  left: 0%;
   height: 28px;
   width: 28px;
   background-color: var(--white);
   border-radius: 50%;
+  cursor: grab;
+}
+
+/* password criteria section */
+
+/* password strength section */
+
+.password-strength-container {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--grey-850);
+}
+
+.password-strength-container > p {
+  font-size: 1rem;
+  color: var(--grey-600);
+  font-weight: bold;
+}
+.password-strength-value {
+  font-size: 1.125rem;
+}
+
+.strength-boxes {
+  display: flex;
+  align-items: center;
+}
+
+.password-strength-box {
+  margin-left: 1rem;
+  width: 10px;
+  height: 28px;
+  outline: 2px solid var(--white);
+}
+
+/* style the boxes based on the password strength data attribute */
+
+/* background colour for Very Weak */
+.password-strength-value[data-strength=""] {
+  display: none;
+}
+[data-strength="Very Weak"] + .password-strength-box {
+  background-color: var(--red);
+  outline-color: var(--red);
+}
+
+/* background colour for Weak */
+[data-strength="Weak"] ~ .password-strength-box:nth-child(-n + 3) {
+  background-color: var(--orange);
+  outline-color: var(--orange);
+}
+
+/* background colour for Medium */
+[data-strength="Medium"] ~ .password-strength-box:nth-child(-n + 4) {
+  background-color: var(--yellow);
+  outline-color: var(--yellow);
+}
+
+/* background colour for Strong */
+[data-strength="Strong"] ~ .password-strength-box:nth-child(-n + 5) {
+  background-color: var(--green);
+  outline-color: var(--green);
+}
+
+/* generate password button */
+
+.generetate-password-btn {
+  background-color: var(--green);
+  padding-block: 1rem;
+  border: none;
+  width: 100%;
+  font-family: inherit;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--grey-800);
+  cursor: pointer;
+  transition: all 100ms ease;
+}
+
+.generetate-password-btn > svg {
+  margin-left: 1rem;
+}
+
+.generetate-password-btn:hover {
+  background-color: transparent;
+  outline: 2px solid var(--green);
+  color: var(--green);
+}
+
+.generetate-password-btn:hover svg > path {
+  fill: var(--green);
 }
