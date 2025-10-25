@@ -1,6 +1,7 @@
-// ====================
-// 1. DOM ELEMENTS
-// ====================
+//
+// DOM ELEMENTS
+//
+
 const progressBarTrack = document.querySelector(".password-progress-bar");
 const progressBarFilled = document.querySelector(
   ".password-progress-bar-filled"
@@ -16,6 +17,7 @@ const generatePasswordBtn = document.querySelector(".generetate-password-btn");
 
 //
 //  PASSWORD CRITERIA
+//
 
 const criteriaCheckboxes = [
   ...document.querySelectorAll("input[type='checkbox']"),
@@ -60,6 +62,7 @@ progressBarCircle.addEventListener("dragstart", (e) => e.preventDefault());
 
 // Drag end
 document.addEventListener("mouseup", () => {
+  //reset values when mouse is not pressed
   isDragging = false;
   document.body.style.userSelect = "auto";
   document.documentElement.style.cursor = "pointer";
