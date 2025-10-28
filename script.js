@@ -69,6 +69,8 @@ document.addEventListener("mouseup", () => {
   isDragging = false;
   document.body.style.userSelect = "auto";
   document.documentElement.style.cursor = "pointer";
+
+  progressBarCircle.classList.remove("being-dragged");
 });
 
 // Drag move
@@ -99,6 +101,8 @@ function choosePasswordCriteria() {
 
 function onDrag(e) {
   if (!isDragging) return;
+
+  changeDragCursorStyle();
 
   const barRect = progressBarTrack.getBoundingClientRect();
   const offsetX = e.clientX - barRect.left;
@@ -179,4 +183,10 @@ function copyPasswordToClipBoard() {
     .catch((err) => {});
 
   copiedMessage.style.display = "block";
+}
+
+function changeDragCursorStyle() {
+  if (!isDragging) return;
+
+  progressBarCircle.classList.add("being-dragged");
 }

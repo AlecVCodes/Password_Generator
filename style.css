@@ -160,6 +160,11 @@ h1 {
   cursor: grab;
 }
 
+.progress-bar-circle.being-dragged {
+  background-color: var(--grey-950);
+  outline: 2px solid var(--green);
+}
+
 .current-password-length-value {
   color: var(--green);
   font-size: clamp(1.5rem, 5vw, 2rem);
