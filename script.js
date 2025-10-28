@@ -19,7 +19,7 @@ const renderedPassword = document.querySelector(".generated-password");
 
 const copyPasswordButton = document.querySelector(".copy-password-btn");
 const copiedMessage = document.querySelector(".copied-message");
-console.log(copyPasswordButton);
+
 //
 //  PASSWORD CRITERIA
 //
@@ -27,8 +27,6 @@ console.log(copyPasswordButton);
 const criteriaCheckboxes = [
   ...document.querySelectorAll("input[type='checkbox']"),
 ];
-console.log(criteriaCheckboxes);
-
 let initialPasswordCriteria = [
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   "abcdefghijklmnopqrstuvwxyz",
@@ -169,7 +167,6 @@ function generatePassword(passwordLength) {
 function renderPasswordToUi(password) {
   renderedPassword.textContent = password;
   renderedPassword.classList.add("rendered");
-  console.log(renderedPassword.classList, "classlist");
 }
 
 function copyPasswordToClipBoard() {
@@ -178,12 +175,8 @@ function copyPasswordToClipBoard() {
 
   navigator.clipboard
     .writeText(password)
-    .then(() => {
-      console.log("Copied!");
-    })
-    .catch((err) => {
-      console.error("Failed to copy: ", err);
-    });
+    .then(() => {})
+    .catch((err) => {});
 
   copiedMessage.style.display = "block";
 }
