@@ -47,16 +47,26 @@ body {
 }
 
 main {
+  margin-top: 6rem;
   width: 90%;
   margin-inline: auto;
+}
+
+h1 {
+  color: var(--grey-600);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: clamp(1rem, 5vw, 1.5rem);
 }
 
 /* generated password section*/
 
 .generated-password-section {
+  margin-bottom: 1.5rem;
   background-color: var(--grey-800);
-  padding: 2rem 1rem;
+  padding: 1.5rem;
   display: flex;
+  position: relative;
   justify-content: space-between;
 }
 
@@ -65,7 +75,7 @@ main {
 }
 
 .generated-password-section > span {
-  font-size: clamp(1.5rem, 5vw, 10rem);
+  font-size: clamp(1.5rem, 5vw, 2rem);
 }
 
 .generated-password.rendered {
@@ -76,6 +86,18 @@ main {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.copied-message {
+  color: var(--green);
+  position: absolute;
+  right: 50px;
+  top: 40%;
+  display: none;
+}
+
+.copy-svg:hover path {
+  fill: var(--white);
 }
 
 /*
@@ -96,8 +118,22 @@ main {
   display: block;
 }
 
-.password-lenth-container {
+.password-length-container {
   margin-block: 2rem;
+}
+
+.password-length-container > * {
+  margin-bottom: 2rem;
+}
+
+.password-length {
+  font-size: clamp(1rem, 5vw, 1.125rem);
+}
+
+.password-length-container > .details {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
 }
 
 .password-progress-bar {
@@ -124,10 +160,15 @@ main {
   cursor: grab;
 }
 
+.current-password-length-value {
+  color: var(--green);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
 /* password criteria section */
 
 input[type="checkbox"] {
   accent-color: var(--green);
+  margin-bottom: 1rem;
 }
 
 /* password strength section */
@@ -138,6 +179,7 @@ input[type="checkbox"] {
   align-items: center;
   justify-content: space-between;
   background-color: var(--grey-850);
+  margin: 2rem 0 1rem 0;
 }
 
 .password-strength-container > p {
@@ -220,4 +262,16 @@ input[type="checkbox"] {
 
 .generetate-password-btn:hover svg > path {
   fill: var(--green);
+}
+
+/* tablet media queries */
+
+@media (min-width: 40em) {
+  main {
+    max-width: 540px;
+  }
+
+  .password-strength-container {
+    margin-block: 2rem;
+  }
 }

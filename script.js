@@ -18,7 +18,7 @@ const generatePasswordBtn = document.querySelector(".generetate-password-btn");
 const renderedPassword = document.querySelector(".generated-password");
 
 const copyPasswordButton = document.querySelector(".copy-password-btn");
-
+const copiedMessage = document.querySelector(".copied-message");
 console.log(copyPasswordButton);
 //
 //  PASSWORD CRITERIA
@@ -117,6 +117,9 @@ function onDrag(e) {
 }
 
 function generatePassword(passwordLength) {
+  //reset copy message
+  copiedMessage.style.display = "none";
+
   if (passwordLength === 0) {
     alert("password can't be 0 in length");
     return;
@@ -181,4 +184,6 @@ function copyPasswordToClipBoard() {
     .catch((err) => {
       console.error("Failed to copy: ", err);
     });
+
+  copiedMessage.style.display = "block";
 }
