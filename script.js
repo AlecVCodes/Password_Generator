@@ -15,6 +15,11 @@ const passwordStrengthLabel = document.querySelector(
 );
 const generatePasswordBtn = document.querySelector(".generetate-password-btn");
 
+const renderedPassword = document.querySelector(".generated-password");
+
+const copyPasswordButton = document.querySelector(".copy-password-btn");
+
+console.log(copyPasswordButton);
 //
 //  PASSWORD CRITERIA
 //
@@ -75,6 +80,10 @@ document.addEventListener("mousemove", onDrag);
 generatePasswordBtn.addEventListener("click", () =>
   generatePassword(currentStep, passWordCriteriaPattern)
 );
+
+//copy password to clipboard
+
+copyPasswordButton.addEventListener("click", copyPasswordToClipBoard);
 
 //
 // MAIN FUNCTIONS
@@ -155,8 +164,21 @@ function generatePassword(passwordLength) {
 //  HELPER FUNCTIONS
 //
 function renderPasswordToUi(password) {
-  const renderedPassword = document.querySelector(".generated-password");
   renderedPassword.textContent = password;
   renderedPassword.classList.add("rendered");
   console.log(renderedPassword.classList, "classlist");
+}
+
+function copyPasswordToClipBoard() {
+  //copy user password to clipboard
+  const password = renderedPassword.textContent;
+
+  navigator.clipboard
+    .writeText(password)
+    .then(() => {
+      console.log("Copied!");
+    })
+    .catch((err) => {
+      console.error("Failed to copy: ", err);
+    });
 }
