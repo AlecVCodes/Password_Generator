@@ -156,9 +156,12 @@ function generatePassword(passwordLength, passWordCriteriaPattern) {
   } else if (passwordLength < 15) {
     passwordStrengthValue = "Medium";
     passwordStrengthLabel.setAttribute("data-strength", "Medium");
-  } else if (passwordLength < 20) {
+  } else if (passwordLength <= 20) {
     passwordStrengthValue = "Strong";
     passwordStrengthLabel.setAttribute("data-strength", "Strong");
+  } else {
+    alert("password can't be more than 20 characters");
+    return;
   }
 
   passwordStrengthLabel.textContent = passwordStrengthValue.toLocaleUpperCase();
