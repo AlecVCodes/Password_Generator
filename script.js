@@ -13,7 +13,7 @@ const passwordLengthValue = document.querySelector(
 const passwordStrengthLabel = document.querySelector(
   ".password-strength-value"
 );
-const generatePasswordBtn = document.querySelector(".generetate-password-btn");
+const generatePasswordBtn = document.querySelector(".generate-password-btn");
 
 const renderedPassword = document.querySelector(".generated-password");
 
@@ -50,7 +50,7 @@ let totalSteps = 20;
 
 // Password criteria selection
 criteriaCheckboxes.forEach((checkbox) => {
-  checkbox.addEventListener("click", (e) => choosePasswordCriteria(e));
+  checkbox.addEventListener("click", () => choosePasswordCriteria());
 });
 
 // Drag start

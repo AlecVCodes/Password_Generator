@@ -239,7 +239,7 @@ input[type="checkbox"] {
 
 /* generate password button */
 
-.generetate-password-btn {
+.generate-password-btn {
   background-color: var(--green);
   padding-block: 1rem;
   border: none;
@@ -255,17 +255,17 @@ input[type="checkbox"] {
   transition: all 100ms ease;
 }
 
-.generetate-password-btn > svg {
+.generate-password-btn > svg {
   margin-left: 1rem;
 }
 
-.generetate-password-btn:hover {
+.generate-password-btn-btn:hover {
   background-color: transparent;
   outline: 2px solid var(--green);
   color: var(--green);
 }
 
-.generetate-password-btn:hover svg > path {
+.generate-password-btn:hover svg > path {
   fill: var(--green);
 }
 
