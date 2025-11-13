@@ -77,9 +77,9 @@ document.addEventListener("mouseup", () => {
 document.addEventListener("mousemove", onDrag);
 
 // Generate password button click
-generatePasswordBtn.addEventListener("click", () =>
-  generatePassword(currentStep, passWordCriteriaPattern)
-);
+generatePasswordBtn.addEventListener("click", () => {
+  generatePassword(currentStep, passWordCriteriaPattern);
+});
 
 //copy password to clipboard
 
@@ -118,7 +118,7 @@ function onDrag(e) {
   return currentStep;
 }
 
-function generatePassword(passwordLength) {
+function generatePassword(passwordLength, passWordCriteriaPattern) {
   //reset copy message
   copiedMessage.style.display = "none";
 
