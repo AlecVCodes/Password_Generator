@@ -56,7 +56,7 @@ criteriaCheckboxes.forEach((checkbox) => {
 // Drag start
 progressBarCircle.addEventListener("mousedown", () => {
   isDragging = true;
-  if (isDragging) document.documentElement.style.cursor = "grab";
+  if (isDragging) document.documentElement.style.cursor = "grabbing";
   document.body.style.userSelect = "none";
 });
 
@@ -183,12 +183,11 @@ function copyPasswordToClipBoard() {
     .writeText(password)
     .then(() => {
       console.log("Success. You can use the copied password");
+      copiedMessage.style.display = "block";
     })
     .catch((err) => {
       console.log("failed to copy to password", err);
     });
-
-  copiedMessage.style.display = "block";
 }
 
 function changeDragCursorStyle() {

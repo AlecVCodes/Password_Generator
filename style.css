@@ -157,7 +157,10 @@ h1 {
   width: 28px;
   background-color: var(--white);
   border-radius: 50%;
-  cursor: grab;
+}
+
+.progress-bar-circle:focus {
+  cursor: grabbing;
 }
 
 .progress-bar-circle.being-dragged {
