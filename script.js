@@ -118,10 +118,22 @@ function onDrag(e) {
 }
 
 function generatePassword(passwordLength, passWordCriteriaPattern) {
+  // Validate password length upfront
+  if (!Number.isInteger(passwordLength) || passwordLength <= 0) {
+    alert("Please enter a valid password length greater than 0.");
+    return; // stop execution early with clear feedback
+  }
+
   //password can't be 0
   if (passwordLength <= 0) {
     alert("password can't be 0 in length");
     return;
+  }
+
+  // password can't be greater than 20
+  if (passwordLength > 20) {
+    alert("Password length can't exceed 20 characters");
+    return; // stop immediately to avoid unnecessary processing
   }
 
   //reset copy message
@@ -130,13 +142,6 @@ function generatePassword(passwordLength, passWordCriteriaPattern) {
   if (criteriaCheckboxes.every((checkbox) => !checkbox.checked)) {
     alert("At least one checkbox must be checked");
     return;
-  }
-
-  if (!passWordCriteriaPattern || passWordCriteriaPattern.length === 0) {
-    alert(
-      "No characters available to generate password. Please select criteria."
-    );
-    return; // Stop if pattern is empty to avoid empty password
   }
 
   const passWordCriteriaPatternString = passWordCriteriaPattern.join("");
