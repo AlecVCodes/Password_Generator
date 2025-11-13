@@ -118,17 +118,25 @@ function onDrag(e) {
 }
 
 function generatePassword(passwordLength, passWordCriteriaPattern) {
-  //reset copy message
-  copiedMessage.style.display = "none";
-
-  if (passwordLength === 0) {
+  //password can't be 0
+  if (passwordLength <= 0) {
     alert("password can't be 0 in length");
     return;
   }
 
+  //reset copy message
+  copiedMessage.style.display = "none";
+
   if (criteriaCheckboxes.every((checkbox) => !checkbox.checked)) {
     alert("At least one checkbox must be checked");
     return;
+  }
+
+  if (!passWordCriteriaPattern || passWordCriteriaPattern.length === 0) {
+    alert(
+      "No characters available to generate password. Please select criteria."
+    );
+    return; // Stop if pattern is empty to avoid empty password
   }
 
   const passWordCriteriaPatternString = passWordCriteriaPattern.join("");
