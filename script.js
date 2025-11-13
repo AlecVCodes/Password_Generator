@@ -1,7 +1,6 @@
 //
 // DOM ELEMENTS
 //
-
 const progressBarTrack = document.querySelector(".password-progress-bar");
 const progressBarFilled = document.querySelector(
   ".password-progress-bar-filled"
@@ -14,35 +13,31 @@ const passwordStrengthLabel = document.querySelector(
   ".password-strength-value"
 );
 const generatePasswordBtn = document.querySelector(".generate-password-btn");
-
 const renderedPassword = document.querySelector(".generated-password");
-
 const copyPasswordButton = document.querySelector(".copy-password-btn");
 const copiedMessage = document.querySelector(".copied-message");
 
 //
-//  PASSWORD CRITERIA
+// PASSWORD CRITERIA
 //
-
 const criteriaCheckboxes = [
   ...document.querySelectorAll("input[type='checkbox']"),
 ];
-let initialPasswordCriteria = [
+const initialPasswordCriteria = [
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   "abcdefghijklmnopqrstuvwxyz",
   "123456789",
-  '!@#$%^&*()_+-=[]{}|;:",.<>?/~`',
+  "!@#$%^&*()_+-=[]{}|;:',.<>?/~`",
 ];
 
 let passWordCriteriaPattern = [];
 
 //
-//STATE VARIABLES
+// STATE VARIABLES
 //
-
 let isDragging = false;
 let currentStep = 0;
-let totalSteps = 20;
+const totalSteps = 20;
 
 //
 // EVENT LISTENERS
@@ -50,13 +45,13 @@ let totalSteps = 20;
 
 // Password criteria selection
 criteriaCheckboxes.forEach((checkbox) => {
-  checkbox.addEventListener("click", () => choosePasswordCriteria());
+  checkbox.addEventListener("change", choosePasswordCriteria);
 });
 
 // Drag start
 progressBarCircle.addEventListener("mousedown", () => {
   isDragging = true;
-  if (isDragging) document.documentElement.style.cursor = "grabbing";
+  document.documentElement.style.cursor = "grabbing";
   document.body.style.userSelect = "none";
 });
 
@@ -65,36 +60,31 @@ progressBarCircle.addEventListener("dragstart", (e) => e.preventDefault());
 
 // Drag end
 document.addEventListener("mouseup", () => {
-  //reset values when mouse is not pressed
   isDragging = false;
   document.body.style.userSelect = "auto";
   document.documentElement.style.cursor = "pointer";
-
   progressBarCircle.classList.remove("being-dragged");
 });
 
 // Drag move
 document.addEventListener("mousemove", onDrag);
 
-// Generate password button click
+// Generate password
 generatePasswordBtn.addEventListener("click", () => {
   generatePassword(currentStep, passWordCriteriaPattern);
 });
 
-//copy password to clipboard
-
+// Copy password
 copyPasswordButton.addEventListener("click", copyPasswordToClipBoard);
 
 //
 // MAIN FUNCTIONS
 //
-
 function choosePasswordCriteria() {
-  passWordCriteriaPattern = []; // Reset global variable
+  passWordCriteriaPattern = [];
   criteriaCheckboxes.forEach((checkbox, index) => {
-    if (checkbox.checked) {
+    if (checkbox.checked)
       passWordCriteriaPattern.push(initialPasswordCriteria[index]);
-    }
   });
 }
 
@@ -105,11 +95,10 @@ function onDrag(e) {
 
   const barRect = progressBarTrack.getBoundingClientRect();
   const offsetX = e.clientX - barRect.left;
-  let percent = Math.min(Math.max(offsetX / barRect.width, 0), 1);
-  const step = Math.round(percent * totalSteps);
-  currentStep = step;
+  const percent = Math.min(Math.max(offsetX / barRect.width, 0), 1);
+  currentStep = Math.round(percent * totalSteps);
 
-  const newPercent = step / totalSteps;
+  const newPercent = currentStep / totalSteps;
   progressBarFilled.style.width = `${newPercent * 100}%`;
   progressBarCircle.style.left = `${newPercent * 100}%`;
   passwordLengthValue.textContent = currentStep;
@@ -118,93 +107,72 @@ function onDrag(e) {
 }
 
 function generatePassword(passwordLength, passWordCriteriaPattern) {
-  // Validate password length upfront
-  if (!Number.isInteger(passwordLength) || passwordLength <= 0) {
-    alert("Please enter a valid password length greater than 0.");
-    return; // stop execution early with clear feedback
-  }
-
-  //password can't be 0
-  if (passwordLength <= 0) {
-    alert("password can't be 0 in length");
-    return;
-  }
-
-  // password can't be greater than 20
-  if (passwordLength > 20) {
-    alert("Password length can't exceed 20 characters");
-    return; // stop immediately to avoid unnecessary processing
-  }
-
-  //reset copy message
+  // Reset copy message
   copiedMessage.style.display = "none";
 
+  // Validation
+  if (!Number.isInteger(passwordLength) || passwordLength <= 0) {
+    alert("Please enter a valid password length greater than 0.");
+    return;
+  }
+  if (passwordLength > 20) {
+    alert("Password length can't exceed 20 characters");
+    return;
+  }
   if (criteriaCheckboxes.every((checkbox) => !checkbox.checked)) {
     alert("At least one checkbox must be checked");
     return;
   }
 
-  const passWordCriteriaPatternString = passWordCriteriaPattern.join("");
+  // Generate password
+  const patternString = passWordCriteriaPattern.join("");
   let result = "";
-
   for (let i = 0; i < passwordLength; i++) {
-    const randomIndex = Math.floor(
-      Math.random() * passWordCriteriaPatternString.length
-    );
-    result += passWordCriteriaPatternString.charAt(randomIndex);
+    const randomIndex = Math.floor(Math.random() * patternString.length);
+    result += patternString[randomIndex];
   }
 
-  let finalPassword = result;
-  renderPasswordToUi(finalPassword);
-
-  let passwordStrengthValue;
-  if (passwordLength === 0) return;
-
-  if (passwordLength < 5) {
-    passwordStrengthValue = "Very Weak";
-    passwordStrengthLabel.setAttribute("data-strength", "Very Weak");
-  } else if (passwordLength < 10) {
-    passwordStrengthValue = "Weak";
-    passwordStrengthLabel.setAttribute("data-strength", "Weak");
-  } else if (passwordLength < 15) {
-    passwordStrengthValue = "Medium";
-    passwordStrengthLabel.setAttribute("data-strength", "Medium");
-  } else if (passwordLength <= 20) {
-    passwordStrengthValue = "Strong";
-    passwordStrengthLabel.setAttribute("data-strength", "Strong");
-  } else {
-    alert("password can't be more than 20 characters");
-    return;
-  }
-
-  passwordStrengthLabel.textContent = passwordStrengthValue.toLocaleUpperCase();
+  renderPasswordToUi(result);
+  updatePasswordStrength(passwordLength);
 }
 
 //
-//  HELPER FUNCTIONS
+// HELPER FUNCTIONS
 //
 function renderPasswordToUi(password) {
   renderedPassword.textContent = password;
   renderedPassword.classList.add("rendered");
 }
 
+function updatePasswordStrength(passwordLength) {
+  let label = "Very Weak";
+
+  if (passwordLength >= 15) label = "Strong";
+  else if (passwordLength >= 10) label = "Medium";
+  else if (passwordLength >= 5) label = "Weak";
+
+  passwordStrengthLabel.textContent = label.toUpperCase();
+  passwordStrengthLabel.setAttribute("data-strength", label);
+}
+
 function copyPasswordToClipBoard() {
-  //copy user password to clipboard
-  const password = renderedPassword.textContent;
+  const password = renderedPassword.textContent.trim();
+  if (!password) {
+    alert("Nothing to copy! Generate a password first.");
+    return;
+  }
 
   navigator.clipboard
     .writeText(password)
     .then(() => {
-      console.log("Success. You can use the copied password");
       copiedMessage.style.display = "block";
+      copiedMessage.textContent = "Copied!";
     })
     .catch((err) => {
-      console.log("failed to copy to password", err);
+      console.error("Failed to copy password:", err);
     });
 }
 
 function changeDragCursorStyle() {
-  if (!isDragging) return;
-
   progressBarCircle.classList.add("being-dragged");
 }
