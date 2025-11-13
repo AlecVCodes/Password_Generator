@@ -90,12 +90,11 @@ copyPasswordButton.addEventListener("click", copyPasswordToClipBoard);
 //
 
 function choosePasswordCriteria() {
-  passWordCriteriaPattern = [];
+  passWordCriteriaPattern = []; // Reset global variable
   criteriaCheckboxes.forEach((checkbox, index) => {
     if (checkbox.checked) {
       passWordCriteriaPattern.push(initialPasswordCriteria[index]);
     }
-    return passWordCriteriaPattern;
   });
 }
 
@@ -179,8 +178,12 @@ function copyPasswordToClipBoard() {
 
   navigator.clipboard
     .writeText(password)
-    .then(() => {})
-    .catch((err) => {});
+    .then(() => {
+      console.log("Success. You can use the copied password");
+    })
+    .catch((err) => {
+      console.log("failed to copy to password", err);
+    });
 
   copiedMessage.style.display = "block";
 }
